@@ -114,9 +114,9 @@ jobs:
 
           case "${{ matrix.abi }}" in
             arm64-v8a) arch=aarch64;;
-            armeabi-v7a) arch=arm;;
-            x86) arch=i686;;
-            x86_64) arch=x86_64;;
+            #armeabi-v7a) arch=arm;;
+            #x86) arch=i686;;
+            #x86_64) arch=x86_64;;
             *) echo "Unknown ABI: ${{ matrix.abi }}"; exit 1;;
           esac
           ./scripts/run-docker.sh ./build-package.sh -a "$arch" qemu-system
@@ -151,9 +151,9 @@ jobs:
           [ ! -f ./app/src/main/assets/alpine-x86_64.iso ] && exit 1
 
           # Detect missing JNI libraries.
-          for abi in arm64-v8a; do
-            [ ! -f "./external/libvmc/jniLibs/${abi}/libVMC.so" ] && exit 1
-          done
+          #for abi in arm64-v8a; do
+            [ ! -f "./external/libvmc/jniLibs/arm64-v8a/libVMC.so" ] && exit 1
+          #done
 
           mkdir -p ./artifacts
 
