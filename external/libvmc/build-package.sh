@@ -196,7 +196,7 @@ builder_setup_meson() {
 		# Patch meson to always return true for libintl check.
 		#patch --silent -p1 -d "$MESON_TMP_FOLDER" < "$BUILDER_SCRIPTDIR"/scripts/patches/meson_libintl.patch || {
 			#error_exit "[${FUNCNAME[0]}]: Meson libintl patch failed."
-		}
+		#}
 
 		mv "$MESON_TMP_FOLDER" "$BUILDER_MESON_FOLDER"
 	fi
