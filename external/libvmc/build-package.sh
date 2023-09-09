@@ -167,7 +167,7 @@ builder_setup_cmake() {
 }
 
 builder_setup_meson() {
-	local BUILDER_MESON_VERSION=0.61.2
+	local BUILDER_MESON_VERSION=1.2.1
 	local BUILDER_MESON_FOLDER="${BUILDER_TOPDIR}/.meson-${BUILDER_MESON_VERSION}"
 
 	if [ ! -d "$BUILDER_MESON_FOLDER" ]; then
@@ -178,20 +178,20 @@ builder_setup_meson() {
 		url_download \
 			"https://github.com/mesonbuild/meson/releases/download/$BUILDER_MESON_VERSION/meson-${BUILDER_MESON_VERSION}.tar.gz" \
 			"$MESON_TAR_FILE" \
-			0233a7f8d959079318f6052b0939c27f68a5de86ba601f25c9ee6869fb5f5889
+			b1db3a153087549497ee52b1c938d2134e0338214fe14f7efd16fecd57b639f5
 
 		tar xf "$MESON_TAR_FILE" -C "$PACKAGE_TMPDIR"
 
-		if [ "$BUILDER_MESON_VERSION" = "0.61.2" ]; then
-			local MESON_0_61_2_GTKDOC_PATCH_FILE="${PACKAGE_TMPDIR}/meson-0.61.2-gtkdoc.patch"
+		#if [ "$BUILDER_MESON_VERSION" = "0.61.2" ]; then
+			#local MESON_0_61_2_GTKDOC_PATCH_FILE="${PACKAGE_TMPDIR}/meson-0.61.2-gtkdoc.patch"
 
-			url_download \
-				"https://github.com/mesonbuild/meson/commit/266e8acb5807b38a550cb5145cea0e19545a21d7.patch" \
-				"$MESON_0_61_2_GTKDOC_PATCH_FILE" \
-				79ecf0e16f613396f43621a928df6c17e6260aa190c320e5c01adad94abd07ad
+			#url_download \
+				#"https://github.com/mesonbuild/meson/commit/266e8acb5807b38a550cb5145cea0e19545a21d7.patch" \
+				#"$MESON_0_61_2_GTKDOC_PATCH_FILE" \
+				#79ecf0e16f613396f43621a928df6c17e6260aa190c320e5c01adad94abd07ad
 
-			patch --silent -p1 -d "$MESON_TMP_FOLDER" < "$MESON_0_61_2_GTKDOC_PATCH_FILE"
-		fi
+			#patch --silent -p1 -d "$MESON_TMP_FOLDER" < "$MESON_0_61_2_GTKDOC_PATCH_FILE"
+		#fi
 
 		# Patch meson to always return true for libintl check.
 		patch --silent -p1 -d "$MESON_TMP_FOLDER" < "$BUILDER_SCRIPTDIR"/scripts/patches/meson_libintl.patch || {
